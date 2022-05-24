@@ -1,8 +1,4 @@
-package br.com.aegro.datasync.domain.service;
-
-import br.com.aegro.datasync.domain.entity.User;
-import br.com.aegro.datasync.domain.exception.UserAlreadyRegisteredException;
-import br.com.aegro.datasync.domain.repository.UserRepository;
+package br.com.aegro.datasync.user.domain;
 
 public class StandardSaveUserService implements SaveUserService {
 

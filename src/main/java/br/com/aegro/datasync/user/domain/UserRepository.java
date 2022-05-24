@@ -1,6 +1,4 @@
-package br.com.aegro.datasync.domain.repository;
-
-import br.com.aegro.datasync.domain.entity.User;
+package br.com.aegro.datasync.user.domain;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
 package br.com.aegro.datasync;
 
-import br.com.aegro.datasync.domain.entity.User;
-import br.com.aegro.datasync.domain.exception.UserAlreadyRegisteredException;
-import br.com.aegro.datasync.domain.repository.UserRepository;
-import br.com.aegro.datasync.domain.service.SaveUserService;
-import br.com.aegro.datasync.domain.service.StandardSaveUserService;
+import br.com.aegro.datasync.user.domain.User;
+import br.com.aegro.datasync.user.domain.UserAlreadyRegisteredException;
+import br.com.aegro.datasync.user.domain.UserRepository;
+import br.com.aegro.datasync.user.domain.SaveUserService;
+import br.com.aegro.datasync.user.domain.StandardSaveUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
