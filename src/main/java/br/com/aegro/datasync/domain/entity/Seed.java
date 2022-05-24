@@ -1,6 +1,9 @@
 package br.com.aegro.datasync.domain.entity;
 
+import br.com.aegro.datasync.domain.exception.SeedException;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Seed {
@@ -26,6 +29,7 @@ public class Seed {
         this.name = name;
         this.manufacturer = manufacturer;
         this.manufacturedAt = manufacturedAt;
+        checkIfExpiresInIsNotLessThanOrEqualsToManufacturedAt(expiresIn);
         this.expiresIn = expiresIn;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
@@ -68,6 +72,7 @@ public class Seed {
     }
 
     public void setExpiresIn(LocalDate expiresIn) {
+        checkIfExpiresInIsNotLessThanOrEqualsToManufacturedAt(expiresIn);
         this.expiresIn = expiresIn;
     }
 
@@ -125,5 +130,17 @@ public class Seed {
                 ", createdAt=" + createdAt +
                 ", createdBy=" + createdBy +
                 '}';
+    }
+
+    private void checkIfExpiresInIsNotLessThanOrEqualsToManufacturedAt(LocalDate expiresIn) {
+        if (expiresIn.isBefore(manufacturedAt) || expiresIn.isEqual(manufacturedAt)) {
+            throw new SeedException(
+                    String.format(
+                            "expiresIn (%s) cannot be less than or equals to the manufacturedAt (%s)",
+                            expiresIn.format(DateTimeFormatter.BASIC_ISO_DATE),
+                            manufacturedAt.format(DateTimeFormatter.BASIC_ISO_DATE)
+                    )
+            );
+        }
     }
 }
