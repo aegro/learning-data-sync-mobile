@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Application" type="Application" factoryName="Application">
+        <envs>
+            <env name="DATA_SYNC_DB_PASSWORD" value="docker" />
+            <env name="DATA_SYNC_DB_URL" value="jdbc:postgresql://localhost:5432/data_sync_db" />
+            <env name="DATA_SYNC_DB_USERNAME" value="postgres" />
+            <env name="DATA_SYNC_SERVER_PORT" value="9000" />
+        </envs>
+        <option name="MAIN_CLASS_NAME" value="br.com.aegro.datasync.Application" />
+        <module name="learning-data-sync-mobile" />
+        <extension name="coverage">
+            <pattern>
+                <option name="PATTERN" value="br.com.aegro.datasync.*" />
+                <option name="ENABLED" value="true" />
+            </pattern>
+        </extension>
+        <method v="2">
+            <option name="Make" enabled="true" />
+        </method>
+    </configuration>
+</component>
