@@ -1,5 +1,7 @@
 package br.com.aegro.datasync.configuration;
 
+import br.com.aegro.datasync.edge.rest.resources.converter.StandardUserResourceConverter;
+import br.com.aegro.datasync.edge.rest.resources.converter.UserResourceConverter;
 import br.com.aegro.datasync.user.application.StandardUserApplicationService;
 import br.com.aegro.datasync.user.application.UserApplicationService;
 import br.com.aegro.datasync.user.application.converter.StandardUserConverter;
@@ -36,5 +38,10 @@ public class ModuleUserConfiguration {
             UserRepository userRepository
     ) {
         return new StandardUserApplicationService(userConverter, userRepository);
+    }
+
+    @Bean
+    public UserResourceConverter createUserResourceConverter() {
+        return new StandardUserResourceConverter();
     }
 }
