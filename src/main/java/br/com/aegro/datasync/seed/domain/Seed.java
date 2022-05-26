@@ -3,6 +3,7 @@ package br.com.aegro.datasync.seed.domain;
 import br.com.aegro.datasync.user.domain.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class Seed {
     private String manufacturer;
     private LocalDate manufacturedAt;
     private LocalDate expiresIn;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private User createdBy;
 
     public Seed(
@@ -22,7 +23,7 @@ public class Seed {
             String manufacturer,
             LocalDate manufacturedAt,
             LocalDate expiresIn,
-            LocalDate createdAt,
+            LocalDateTime createdAt,
             User createdBy
     ) {
         this.id = id;
@@ -76,11 +77,11 @@ public class Seed {
         this.expiresIn = expiresIn;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
