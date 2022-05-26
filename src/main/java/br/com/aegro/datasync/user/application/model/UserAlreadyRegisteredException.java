@@ -1,4 +1,4 @@
-package br.com.aegro.datasync.user.domain;
+package br.com.aegro.datasync.user.application.model;
 
 public class UserAlreadyRegisteredException extends RuntimeException {
     public UserAlreadyRegisteredException(String email) {

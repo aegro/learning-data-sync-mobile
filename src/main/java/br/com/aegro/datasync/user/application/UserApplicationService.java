@@ -6,4 +6,6 @@ public interface UserApplicationService {
 
     UserModel authenticate(String email);
 
+    void save(UserModel userModel);
+
 }
