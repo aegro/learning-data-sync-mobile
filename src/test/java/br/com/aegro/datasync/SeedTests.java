@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ public class SeedTests {
                 "Fake Manufacturer",
                 LocalDate.of(2022, Month.JANUARY, 1),
                 LocalDate.of(2023, Month.JANUARY, 1),
-                LocalDate.of(2022, Month.MAY, 24),
+                LocalDateTime.of(2022, Month.MAY, 24, 23, 59),
                 user
         );
 
@@ -36,7 +37,7 @@ public class SeedTests {
         Assertions.assertEquals("Fake Manufacturer", seed.getManufacturer());
         Assertions.assertEquals(LocalDate.of(2022, Month.JANUARY, 1), seed.getManufacturedAt());
         Assertions.assertEquals(LocalDate.of(2023, Month.JANUARY, 1), seed.getExpiresIn());
-        Assertions.assertEquals(LocalDate.of(2022, Month.MAY, 24), seed.getCreatedAt());
+        Assertions.assertEquals(LocalDateTime.of(2022, Month.MAY, 24, 23, 59), seed.getCreatedAt());
         Assertions.assertNotNull(user);
         Assertions.assertEquals(user, seed.getCreatedBy());
     }
@@ -55,7 +56,7 @@ public class SeedTests {
                 "Fake Manufacturer",
                 LocalDate.of(2022, Month.JANUARY, 1),
                 LocalDate.of(2021, Month.JANUARY, 1),
-                LocalDate.of(2022, Month.MAY, 24),
+                LocalDateTime.of(2022, Month.MAY, 24, 23, 59),
                 user
         ));
 
