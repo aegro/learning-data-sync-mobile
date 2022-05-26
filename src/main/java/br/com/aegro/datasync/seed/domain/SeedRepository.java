@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SeedRepository {
 
-    List<Seed> findAllFor(User user);
+    List<Seed> findAllByUser(String userId);
 
     Seed save(Seed seed);
 
