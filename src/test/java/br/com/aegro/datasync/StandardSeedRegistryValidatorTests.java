@@ -41,6 +41,8 @@ public class StandardSeedRegistryValidatorTests {
                 user
         );
 
+        Mockito.when(userRepository.fetchById(user.getExternalId())).thenReturn(user);
+
         seedRegistryValidator.validate(seed);
 
         Assertions.assertNotNull(seed);

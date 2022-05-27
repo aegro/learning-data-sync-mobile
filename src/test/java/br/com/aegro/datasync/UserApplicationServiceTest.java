@@ -33,6 +33,7 @@ public class UserApplicationServiceTest {
     @Test
     public void authenticating_an_user_successfully() {
         var user = new User(
+                999L,
                 UUID.randomUUID().toString(),
                 "Fake User",
                 "fake.user@fakecompany.com"
@@ -48,6 +49,7 @@ public class UserApplicationServiceTest {
     @Test
     public void authenticating_an_user_that_does_not_exist() {
         var user = new User(
+                null,
                 UUID.randomUUID().toString(),
                 "Fake User",
                 "fake.user@fakecompany.com"
