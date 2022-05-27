@@ -1,8 +1,10 @@
 package br.com.aegro.datasync;
 
+import br.com.aegro.datasync.commons.validation.ValidationException;
+import br.com.aegro.datasync.commons.validation.Validator;
+import br.com.aegro.datasync.seed.domain.StandardSeedRegistryValidator;
 import br.com.aegro.datasync.seed.domain.model.Seed;
 import br.com.aegro.datasync.user.domain.model.User;
-import br.com.aegro.datasync.seed.domain.SeedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.UUID;
 
-public class SeedTests {
+public class StandardSeedRegistryValidatorTests {
+
+    private final Validator<Seed> seedRegistryValidator = new StandardSeedRegistryValidator();
 
     @Test
     public void creating_a_seed_successfully() {
@@ -31,13 +35,18 @@ public class SeedTests {
                 user
         );
 
+        seedRegistryValidator.validate(seed);
+
         Assertions.assertNotNull(seed);
         Assertions.assertNotNull(seed.getId());
         Assertions.assertEquals("Fake Seed", seed.getName());
         Assertions.assertEquals("Fake Manufacturer", seed.getManufacturer());
         Assertions.assertEquals(LocalDate.of(2022, Month.JANUARY, 1), seed.getManufacturedAt());
         Assertions.assertEquals(LocalDate.of(2023, Month.JANUARY, 1), seed.getExpiresIn());
-        Assertions.assertEquals(LocalDateTime.of(2022, Month.MAY, 24, 23, 59), seed.getCreatedAt());
+        Assertions.assertEquals(
+                LocalDateTime.of(2022, Month.MAY, 24, 23, 59),
+                seed.getCreatedAt()
+        );
         Assertions.assertNotNull(user);
         Assertions.assertEquals(user, seed.getCreatedBy());
     }
@@ -50,18 +59,22 @@ public class SeedTests {
                 "fake.user@fakecompany.com"
         );
 
-        var exception = Assertions.assertThrows(SeedException.class, () -> new Seed(
-                UUID.randomUUID().toString(),
-                "Fake Seed",
-                "Fake Manufacturer",
-                LocalDate.of(2022, Month.JANUARY, 1),
-                LocalDate.of(2021, Month.JANUARY, 1),
-                LocalDateTime.of(2022, Month.MAY, 24, 23, 59),
-                user
-        ));
+        var exception = Assertions.assertThrows(
+                ValidationException.class,
+                () -> seedRegistryValidator.validate(
+                        new Seed(
+                                UUID.randomUUID().toString(),
+                                "Fake Seed",
+                                "Fake Manufacturer",
+                                LocalDate.of(2022, Month.JANUARY, 1),
+                                LocalDate.of(2021, Month.JANUARY, 1),
+                                LocalDateTime.of(2022, Month.MAY, 24, 23, 59),
+                                user
+                        )
+                ));
 
         Assertions.assertEquals(
-                "expiresIn (20210101) cannot be less than or equals to the manufacturedAt (20220101)",
+                "expiresIn (2021-01-01) cannot be less than or equals to the manufacturedAt (2022-01-01)",
                 exception.getMessage()
         );
     }
