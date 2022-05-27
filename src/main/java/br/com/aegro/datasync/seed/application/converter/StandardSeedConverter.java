@@ -15,6 +15,7 @@ public class StandardSeedConverter implements SeedConverter {
     @Override
     public Seed convertTo(SeedModel seedModel) {
         return new Seed(
+                null,
                 seedModel.getId(),
                 seedModel.getName(),
                 seedModel.getManufacturer(),
@@ -28,7 +29,7 @@ public class StandardSeedConverter implements SeedConverter {
     @Override
     public SeedModel convertFrom(Seed seed) {
         return new SeedModel(
-                seed.getId(),
+                seed.getExternalId(),
                 seed.getName(),
                 seed.getManufacturer(),
                 seed.getManufacturedAt(),
