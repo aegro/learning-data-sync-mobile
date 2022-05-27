@@ -40,7 +40,7 @@ public class SeedData {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "created_by", nullable = false)
     private UserData createdBy;
 
     public Long getId() {
