@@ -7,6 +7,7 @@ public class StandardUserMapper implements UserMapper {
     @Override
     public User toDomain(UserData userData) {
         return new User(
+                userData.getId(),
                 userData.getExternalId(),
                 userData.getFullName(),
                 userData.getEmail()
@@ -16,7 +17,8 @@ public class StandardUserMapper implements UserMapper {
     @Override
     public UserData toData(User user) {
         var userData = new UserData();
-        userData.setExternalId(user.getId());
+        userData.setId(user.getId());
+        userData.setExternalId(user.getExternalId());
         userData.setFullName(user.getFullName());
         userData.setEmail(user.getEmail());
         return userData;

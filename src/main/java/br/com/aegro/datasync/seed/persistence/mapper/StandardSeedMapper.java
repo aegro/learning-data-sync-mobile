@@ -15,6 +15,7 @@ public class StandardSeedMapper implements SeedMapper {
     @Override
     public Seed toDomain(SeedData seedData) {
         return new Seed(
+                seedData.getId(),
                 seedData.getExternalId(),
                 seedData.getName(),
                 seedData.getManufacturer(),
@@ -28,7 +29,8 @@ public class StandardSeedMapper implements SeedMapper {
     @Override
     public SeedData toData(Seed seed) {
         var seedData = new SeedData();
-        seedData.setExternalId(seed.getId());
+        seedData.setId(seed.getId());
+        seedData.setExternalId(seed.getExternalId());
         seedData.setName(seed.getName());
         seedData.setManufacturer(seed.getManufacturer());
         seedData.setManufacturedAt(seed.getManufacturedAt());

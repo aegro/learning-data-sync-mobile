@@ -8,7 +8,8 @@ import java.util.Objects;
 
 public class Seed {
 
-    private String id;
+    private Long id;
+    private String externalId;
     private String name;
     private String manufacturer;
     private LocalDate manufacturedAt;
@@ -17,7 +18,8 @@ public class Seed {
     private User createdBy;
 
     public Seed(
-            String id,
+            Long id,
+            String externalId,
             String name,
             String manufacturer,
             LocalDate manufacturedAt,
@@ -25,7 +27,7 @@ public class Seed {
             LocalDateTime createdAt,
             User createdBy
     ) {
-        if (id == null) throw new NullPointerException("id cannot be null");
+        if (externalId == null) throw new NullPointerException("externalId cannot be null");
         if (name == null) throw new NullPointerException("name cannot be null");
         if (manufacturer == null) throw new NullPointerException("manufacturer cannot be null");
         if (manufacturedAt == null) throw new NullPointerException("manufacturedAt cannot be null");
@@ -34,6 +36,7 @@ public class Seed {
         if (createdBy == null) throw new NullPointerException("createdBy cannot be null");
 
         this.id = id;
+        this.externalId = externalId;
         this.name = name;
         this.manufacturer = manufacturer;
         this.manufacturedAt = manufacturedAt;
@@ -42,12 +45,20 @@ public class Seed {
         this.createdBy = createdBy;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     public String getName() {
@@ -103,7 +114,8 @@ public class Seed {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seed seed = (Seed) o;
-        return id.equals(seed.id) &&
+        return Objects.equals(id, seed.id) &&
+                externalId.equals(seed.externalId) &&
                 name.equals(seed.name) &&
                 manufacturer.equals(seed.manufacturer) &&
                 manufacturedAt.equals(seed.manufacturedAt) &&
@@ -114,21 +126,14 @@ public class Seed {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                id,
-                name,
-                manufacturer,
-                manufacturedAt,
-                expiresIn,
-                createdAt,
-                createdBy
-        );
+        return Objects.hash(id, externalId, name, manufacturer, manufacturedAt, expiresIn, createdAt, createdBy);
     }
 
     @Override
     public String toString() {
         return "Seed{" +
                 "id=" + id +
+                ", externalId='" + externalId + '\'' +
                 ", name='" + name + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", manufacturedAt=" + manufacturedAt +
