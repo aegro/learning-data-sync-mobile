@@ -19,6 +19,7 @@ import br.com.aegro.datasync.seed.persistence.dao.SeedDao;
 import br.com.aegro.datasync.seed.persistence.mapper.SeedMapper;
 import br.com.aegro.datasync.seed.persistence.mapper.StandardSeedMapper;
 import br.com.aegro.datasync.user.application.converter.UserConverter;
+import br.com.aegro.datasync.user.domain.UserRepository;
 import br.com.aegro.datasync.user.persistence.mapper.UserMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +38,8 @@ public class ModuleSeedConfiguration {
     }
 
     @Bean
-    public Validator<Seed> createSeedRegistryValidator() {
-        return new StandardSeedRegistryValidator();
+    public Validator<Seed> createSeedRegistryValidator(UserRepository userRepository) {
+        return new StandardSeedRegistryValidator(userRepository);
     }
 
     @Bean
