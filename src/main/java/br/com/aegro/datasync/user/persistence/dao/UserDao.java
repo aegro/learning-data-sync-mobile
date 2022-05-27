@@ -13,6 +13,8 @@ public interface UserDao extends JpaRepository<UserData, Long> {
 
     Optional<UserData> findByEmail(String email);
 
+    Optional<UserData> findByExternalId(String externalId);
+
     @Query("SELECT u from UserData u WHERE u.externalId != :externalId AND u.email = :email")
     Optional<UserData> existDuplicatedByExternalIdAndEmail(
             @Param("externalId") String externalId,
