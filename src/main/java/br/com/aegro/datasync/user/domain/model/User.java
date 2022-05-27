@@ -9,6 +9,10 @@ public class User {
     private String email;
 
     public User(String id, String fullName, String email) {
+        if (id == null) throw new NullPointerException("id cannot be null");
+        if (fullName == null) throw new NullPointerException("fullName cannot be null");
+        if (email == null) throw new NullPointerException("email cannot be null");
+
         this.id = id;
         this.fullName = fullName;
         this.email = email;
