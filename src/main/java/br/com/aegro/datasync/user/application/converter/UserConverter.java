@@ -1,7 +1,7 @@
 package br.com.aegro.datasync.user.application.converter;
 
 import br.com.aegro.datasync.user.application.model.UserModel;
-import br.com.aegro.datasync.user.domain.User;
+import br.com.aegro.datasync.user.domain.model.User;
 
 public interface UserConverter {
 

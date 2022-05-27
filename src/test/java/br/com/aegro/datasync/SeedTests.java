@@ -1,7 +1,7 @@
 package br.com.aegro.datasync;
 
 import br.com.aegro.datasync.seed.domain.Seed;
-import br.com.aegro.datasync.user.domain.User;
+import br.com.aegro.datasync.user.domain.model.User;
 import br.com.aegro.datasync.seed.domain.SeedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

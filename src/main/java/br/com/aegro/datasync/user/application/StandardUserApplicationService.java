@@ -1,9 +1,9 @@
 package br.com.aegro.datasync.user.application;
 
 import br.com.aegro.datasync.user.application.converter.UserConverter;
-import br.com.aegro.datasync.user.application.model.UserAlreadyRegisteredException;
 import br.com.aegro.datasync.user.application.model.UserModel;
 import br.com.aegro.datasync.user.application.model.UserNotFoundException;
+import br.com.aegro.datasync.user.domain.UserRegistryDomainService;
 import br.com.aegro.datasync.user.domain.UserRepository;
 
 public class StandardUserApplicationService implements UserApplicationService {
@@ -12,9 +12,16 @@ public class StandardUserApplicationService implements UserApplicationService {
 
     private final UserRepository userRepository;
 
-    public StandardUserApplicationService(UserConverter userConverter, UserRepository userRepository) {
+    private final UserRegistryDomainService userRegistryDomainService;
+
+    public StandardUserApplicationService(
+            UserConverter userConverter,
+            UserRepository userRepository,
+            UserRegistryDomainService userRegistryDomainService
+    ) {
         this.userConverter = userConverter;
         this.userRepository = userRepository;
+        this.userRegistryDomainService = userRegistryDomainService;
     }
 
     @Override
@@ -26,15 +33,6 @@ public class StandardUserApplicationService implements UserApplicationService {
 
     @Override
     public void save(UserModel userModel) {
-        var user = userConverter.convertTo(userModel);
-
-        userRepository.findByEmail(user.getEmail())
-                .ifPresent(userFromDatabase -> {
-                    throw new UserAlreadyRegisteredException(userFromDatabase.getEmail());
-                });
-
-        var savedUser = userRepository.save(user);
-
-        userConverter.convertFrom(savedUser);
+        userRegistryDomainService.register(userConverter.convertTo(userModel));
     }
 }
