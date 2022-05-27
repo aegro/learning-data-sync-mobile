@@ -4,7 +4,6 @@ import br.com.aegro.datasync.edge.rest.resources.AuthResource;
 import br.com.aegro.datasync.edge.rest.resources.UserResource;
 import br.com.aegro.datasync.edge.rest.resources.converter.UserResourceConverter;
 import br.com.aegro.datasync.user.application.UserApplicationService;
-import br.com.aegro.datasync.user.domain.model.UserAlreadyRegisteredException;
 import br.com.aegro.datasync.user.application.model.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -37,8 +37,8 @@ public class UserRestController {
     public void save(@Valid @RequestBody UserResource userResource) {
         try {
             userApplicationService.save(userResourceConverter.convertFrom(userResource));
-        } catch (UserAlreadyRegisteredException userAlreadyRegisteredException) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, null, userAlreadyRegisteredException);
+        } catch (ValidationException validationException) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, null, validationException);
         }
     }
 
