@@ -1,5 +1,6 @@
-package br.com.aegro.datasync.seed.domain;
+package br.com.aegro.datasync.seed.domain.model;
 
+import br.com.aegro.datasync.seed.domain.SeedException;
 import br.com.aegro.datasync.user.domain.model.User;
 
 import java.time.LocalDate;

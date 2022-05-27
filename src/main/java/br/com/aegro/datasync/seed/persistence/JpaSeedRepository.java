@@ -1,6 +1,6 @@
 package br.com.aegro.datasync.seed.persistence;
 
-import br.com.aegro.datasync.seed.domain.Seed;
+import br.com.aegro.datasync.seed.domain.model.Seed;
 import br.com.aegro.datasync.seed.domain.SeedRepository;
 import br.com.aegro.datasync.seed.persistence.dao.SeedDao;
 import br.com.aegro.datasync.seed.persistence.mapper.SeedMapper;
