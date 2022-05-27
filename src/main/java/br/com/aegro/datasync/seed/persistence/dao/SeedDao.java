@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SeedDao extends JpaRepository<SeedData, Long> {
 
-    @Query("SELECT s FROM SeedData s JOIN s.createdBy u WHERE u.id = ?1")
+    @Query("SELECT s FROM SeedData s JOIN s.createdBy u WHERE u.externalId = ?1")
     List<SeedData> findAllByUser(String userId);
 
 }
