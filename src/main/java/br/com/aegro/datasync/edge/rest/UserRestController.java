@@ -4,7 +4,7 @@ import br.com.aegro.datasync.edge.rest.resources.AuthResource;
 import br.com.aegro.datasync.edge.rest.resources.UserResource;
 import br.com.aegro.datasync.edge.rest.resources.converter.UserResourceConverter;
 import br.com.aegro.datasync.user.application.UserApplicationService;
-import br.com.aegro.datasync.user.application.model.UserAlreadyRegisteredException;
+import br.com.aegro.datasync.user.domain.model.UserAlreadyRegisteredException;
 import br.com.aegro.datasync.user.application.model.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

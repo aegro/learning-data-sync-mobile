@@ -6,6 +6,8 @@ import br.com.aegro.datasync.user.application.StandardUserApplicationService;
 import br.com.aegro.datasync.user.application.UserApplicationService;
 import br.com.aegro.datasync.user.application.converter.StandardUserConverter;
 import br.com.aegro.datasync.user.application.converter.UserConverter;
+import br.com.aegro.datasync.user.domain.StandardUserRegistryDomainService;
+import br.com.aegro.datasync.user.domain.UserRegistryDomainService;
 import br.com.aegro.datasync.user.domain.UserRepository;
 import br.com.aegro.datasync.user.persistence.JpaUserRepository;
 import br.com.aegro.datasync.user.persistence.dao.UserDao;
@@ -28,6 +30,11 @@ public class ModuleUserConfiguration {
     }
 
     @Bean
+    public UserRegistryDomainService createUserRegistryDomainService(UserRepository userRepository) {
+        return new StandardUserRegistryDomainService(userRepository);
+    }
+
+    @Bean
     public UserConverter createUserConverter() {
         return new StandardUserConverter();
     }
@@ -35,9 +42,14 @@ public class ModuleUserConfiguration {
     @Bean
     public UserApplicationService createUserApplicationService(
             UserConverter userConverter,
-            UserRepository userRepository
+            UserRepository userRepository,
+            UserRegistryDomainService userRegistryDomainService
     ) {
-        return new StandardUserApplicationService(userConverter, userRepository);
+        return new StandardUserApplicationService(
+                userConverter,
+                userRepository,
+                userRegistryDomainService
+        );
     }
 
     @Bean
