@@ -1,4 +1,4 @@
-package br.com.aegro.datasync.user.domain;
+package br.com.aegro.datasync.user.domain.model;
 
 import java.util.Objects;
 

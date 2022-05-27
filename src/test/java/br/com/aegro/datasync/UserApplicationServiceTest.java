@@ -6,7 +6,7 @@ import br.com.aegro.datasync.user.application.converter.StandardUserConverter;
 import br.com.aegro.datasync.user.application.converter.UserConverter;
 import br.com.aegro.datasync.user.application.model.UserAlreadyRegisteredException;
 import br.com.aegro.datasync.user.application.model.UserNotFoundException;
-import br.com.aegro.datasync.user.domain.User;
+import br.com.aegro.datasync.user.domain.model.User;
 import br.com.aegro.datasync.user.domain.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
