@@ -1,5 +1,6 @@
 package br.com.aegro.datasync.configuration;
 
+import br.com.aegro.datasync.commons.validation.Validator;
 import br.com.aegro.datasync.edge.rest.resources.converter.StandardUserResourceConverter;
 import br.com.aegro.datasync.edge.rest.resources.converter.UserResourceConverter;
 import br.com.aegro.datasync.user.application.StandardUserApplicationService;
@@ -7,8 +8,10 @@ import br.com.aegro.datasync.user.application.UserApplicationService;
 import br.com.aegro.datasync.user.application.converter.StandardUserConverter;
 import br.com.aegro.datasync.user.application.converter.UserConverter;
 import br.com.aegro.datasync.user.domain.StandardUserRegistryDomainService;
+import br.com.aegro.datasync.user.domain.StandardUserRegistryValidator;
 import br.com.aegro.datasync.user.domain.UserRegistryDomainService;
 import br.com.aegro.datasync.user.domain.UserRepository;
+import br.com.aegro.datasync.user.domain.model.User;
 import br.com.aegro.datasync.user.persistence.JpaUserRepository;
 import br.com.aegro.datasync.user.persistence.dao.UserDao;
 import br.com.aegro.datasync.user.persistence.mapper.StandardUserMapper;
@@ -30,8 +33,16 @@ public class ModuleUserConfiguration {
     }
 
     @Bean
-    public UserRegistryDomainService createUserRegistryDomainService(UserRepository userRepository) {
-        return new StandardUserRegistryDomainService(userRepository);
+    public Validator<User> createUserRegistryValidator(UserRepository userRepository) {
+        return new StandardUserRegistryValidator(userRepository);
+    }
+
+    @Bean
+    public UserRegistryDomainService createUserRegistryDomainService(
+            UserRepository userRepository,
+            Validator<User> userRegistryValidator
+    ) {
+        return new StandardUserRegistryDomainService(userRepository, userRegistryValidator);
     }
 
     @Bean

@@ -1,8 +1,8 @@
 package br.com.aegro.datasync;
 
-import br.com.aegro.datasync.user.domain.model.UserAlreadyRegisteredException;
-import br.com.aegro.datasync.user.domain.StandardUserRegistryDomainService;
-import br.com.aegro.datasync.user.domain.UserRegistryDomainService;
+import br.com.aegro.datasync.commons.validation.ValidationException;
+import br.com.aegro.datasync.commons.validation.Validator;
+import br.com.aegro.datasync.user.domain.StandardUserRegistryValidator;
 import br.com.aegro.datasync.user.domain.UserRepository;
 import br.com.aegro.datasync.user.domain.model.User;
 import org.junit.jupiter.api.Assertions;
@@ -12,14 +12,11 @@ import org.mockito.Mockito;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.Mockito.never;
-
-public class UserRegistryDomainServiceTests {
+public class StandardUserRegistryValidatorTests {
 
     private final UserRepository userRepository = Mockito.mock(UserRepository.class);
 
-    private final UserRegistryDomainService userRegistryDomainService =
-            new StandardUserRegistryDomainService(userRepository);
+    private final Validator<User> userRegistryValidator = new StandardUserRegistryValidator(userRepository);
 
     @Test
     public void creating_an_user_successfully() {
@@ -36,10 +33,9 @@ public class UserRegistryDomainServiceTests {
 
         Mockito.when(userRepository.save(user)).thenReturn(user);
 
-        userRegistryDomainService.register(user);
+        userRegistryValidator.validate(user);
 
         Mockito.verify(userRepository).existDuplicatedByEmail(user.getId(), user.getEmail());
-        Mockito.verify(userRepository).save(user);
     }
 
     @Test
@@ -56,16 +52,14 @@ public class UserRegistryDomainServiceTests {
         ).thenReturn(Optional.of(user));
 
         var exception = Assertions.assertThrows(
-                UserAlreadyRegisteredException.class,
-                () -> userRegistryDomainService.register(user)
+                ValidationException.class,
+                () -> userRegistryValidator.validate(user)
         );
 
         Assertions.assertEquals(
                 "There's an user registered for the email " + user.getEmail(),
                 exception.getMessage()
         );
-
-        Mockito.verify(userRepository, never()).save(user);
     }
 
 }
