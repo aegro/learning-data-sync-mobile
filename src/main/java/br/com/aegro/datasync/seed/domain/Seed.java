@@ -26,6 +26,14 @@ public class Seed {
             LocalDateTime createdAt,
             User createdBy
     ) {
+        if (id == null) throw new NullPointerException("id cannot be null");
+        if (name == null) throw new NullPointerException("name cannot be null");
+        if (manufacturer == null) throw new NullPointerException("manufacturer cannot be null");
+        if (manufacturedAt == null) throw new NullPointerException("manufacturedAt cannot be null");
+        if (expiresIn == null) throw new NullPointerException("expiresIn cannot be null");
+        if (createdAt == null) throw new NullPointerException("createdAt cannot be null");
+        if (createdBy == null) throw new NullPointerException("createdBy cannot be null");
+
         this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
