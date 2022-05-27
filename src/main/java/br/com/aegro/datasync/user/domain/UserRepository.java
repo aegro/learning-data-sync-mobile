@@ -8,6 +8,8 @@ public interface UserRepository {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> existDuplicatedByEmail(String id, String email);
+
     User save(User user);
 
 }

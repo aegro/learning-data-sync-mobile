@@ -1,7 +1,7 @@
 package br.com.aegro.datasync.user.persistence;
 
-import br.com.aegro.datasync.user.domain.model.User;
 import br.com.aegro.datasync.user.domain.UserRepository;
+import br.com.aegro.datasync.user.domain.model.User;
 import br.com.aegro.datasync.user.persistence.dao.UserDao;
 import br.com.aegro.datasync.user.persistence.mapper.UserMapper;
 
@@ -20,6 +20,12 @@ public class JpaUserRepository implements UserRepository {
     @Override
     public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email).map(userMapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> existDuplicatedByEmail(String id, String email) {
+        return userDao.existDuplicatedByExternalIdAndEmail(id, email)
+                .map(userMapper::toDomain);
     }
 
     @Override
