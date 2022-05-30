@@ -4,26 +4,36 @@ import java.util.Objects;
 
 public class User {
 
-    private String id;
+    private Long id;
+    private String externalId;
     private String fullName;
     private String email;
 
-    public User(String id, String fullName, String email) {
-        if (id == null) throw new NullPointerException("id cannot be null");
+    public User(Long id, String externalId, String fullName, String email) {
+        if (externalId == null) throw new NullPointerException("id cannot be null");
         if (fullName == null) throw new NullPointerException("fullName cannot be null");
         if (email == null) throw new NullPointerException("email cannot be null");
 
         this.id = id;
+        this.externalId = externalId;
         this.fullName = fullName;
         this.email = email;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     public String getFullName() {
@@ -47,18 +57,22 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && fullName.equals(user.fullName) && email.equals(user.email);
+        return Objects.equals(id, user.id) &&
+                externalId.equals(user.externalId) &&
+                fullName.equals(user.fullName) &&
+                email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, email);
+        return Objects.hash(id, externalId, fullName, email);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", externalId='" + externalId + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 '}';

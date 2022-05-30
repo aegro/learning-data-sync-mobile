@@ -21,13 +21,14 @@ public class StandardUserRegistryValidatorTests {
     @Test
     public void creating_an_user_successfully() {
         var user = new User(
+                null,
                 UUID.randomUUID().toString(),
                 "Fake User",
                 "fake.user@fakecompany.com"
         );
 
         Mockito.when(userRepository.existDuplicatedByEmail(
-                user.getId(),
+                user.getExternalId(),
                 user.getEmail())
         ).thenReturn(Optional.empty());
 
@@ -35,19 +36,20 @@ public class StandardUserRegistryValidatorTests {
 
         userRegistryValidator.validate(user);
 
-        Mockito.verify(userRepository).existDuplicatedByEmail(user.getId(), user.getEmail());
+        Mockito.verify(userRepository).existDuplicatedByEmail(user.getExternalId(), user.getEmail());
     }
 
     @Test
     public void creating_an_user_that_already_exists() {
         var user = new User(
+                999L,
                 UUID.randomUUID().toString(),
                 "Fake User",
                 "fake.user@fakecompany.com"
         );
 
         Mockito.when(userRepository.existDuplicatedByEmail(
-                user.getId(),
+                user.getExternalId(),
                 user.getEmail())
         ).thenReturn(Optional.of(user));
 

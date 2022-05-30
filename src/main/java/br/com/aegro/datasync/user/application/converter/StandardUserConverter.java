@@ -7,6 +7,7 @@ public class StandardUserConverter implements UserConverter {
     @Override
     public User convertTo(UserModel userModel) {
         return new User(
+                null,
                 userModel.getId(),
                 userModel.getFullName(),
                 userModel.getEmail()
@@ -16,7 +17,7 @@ public class StandardUserConverter implements UserConverter {
     @Override
     public UserModel convertFrom(User user) {
         return new UserModel(
-                user.getId(),
+                user.getExternalId(),
                 user.getFullName(),
                 user.getEmail()
         );

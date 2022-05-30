@@ -14,7 +14,7 @@ public class StandardUserRegistryValidator implements Validator<User> {
 
     @Override
     public void validate(User candidate) {
-        userRepository.existDuplicatedByEmail(candidate.getId(), candidate.getEmail())
+        userRepository.existDuplicatedByEmail(candidate.getExternalId(), candidate.getEmail())
                 .ifPresent(userFromDatabase -> {
                     throw new ValidationException("There's an user registered for the email " + candidate.getEmail());
                 });
